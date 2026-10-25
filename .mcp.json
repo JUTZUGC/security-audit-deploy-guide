@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "securityaudit-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}

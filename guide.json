@@ -1,0 +1,107 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "securityaudit",
+    "nameCn": "Security Audit",
+    "repoName": "security-audit-deploy-guide",
+    "oneLiner": "给编码 Agent 用的多阶段安全审计技能",
+    "officialRepo": "https://github.com/cloudflare/security-audit-skill",
+    "officialDocs": "https://github.com/cloudflare/security-audit-skill#installation",
+    "stars": "45.8k",
+    "license": "MIT",
+    "highlights": [
+      "六阶段流程：侦察 → 覆盖率驱动挖掘 → 候选验证 → 结构化输出 → 独立复核 → 报告",
+      "结论分三档：confirmed 有完整源码链路与可复现结果，needs_validation 只给未决事实、不给严重级别，rejected 记录被推翻的候选",
+      "覆盖范围：Web / 客户端 / 云与部署 / 供应链 / RPC / 内存安全 / LLM 提示注入 / 数据隔离 / 桌面与移动",
+      "产物：architecture.md、coverage-ledger.json、findings.json、REPORT.md、FINDINGS-DETAIL.md"
+    ],
+    "mcpSupport": "这个仓库是 Agent Skill（SKILL.md + 提示词 + 校验脚本），不是 MCP server，也不提供 MCP 工具。它依赖编码 Agent 自己的工具调用与子 Agent 能力；本仓库的 MCP 只提供安装步骤、触发方式与常见坑。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-25",
+    "verification": [
+      [
+        "全局安装到 Trae / Trae CN（-g -a trae trae-cn -y --copy）",
+        "已验证 2026-10-25"
+      ],
+      [
+        "skills list -g 回读已安装技能",
+        "已验证 2026-10-25"
+      ],
+      [
+        "项目级安装（-y --copy）落盘 .agents/skills/security-audit",
+        "已验证 2026-10-25"
+      ],
+      [
+        "MCP 服务握手与工具列表（initialize / tools/list）",
+        "已验证 2026-10-25"
+      ],
+      [
+        "非目标宿主调用被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-25"
+      ]
+    ],
+    "deploy": {
+      "type": "script",
+      "requires": [
+        "node"
+      ],
+      "steps": [
+        "npx -y skills@latest add https://github.com/cloudflare/security-audit-skill --skill security-audit -g -a trae trae-cn -y --copy",
+        "npx -y skills@latest list -g"
+      ],
+      "stepsPs": [
+        "npx -y skills@latest add https://github.com/cloudflare/security-audit-skill --skill security-audit -g -a trae trae-cn -y --copy",
+        "npx -y skills@latest list -g"
+      ],
+      "source": "https://github.com/cloudflare/security-audit-skill#installation"
+    },
+    "pitfalls": [
+      "装完客户端里看不到技能：说明它不读 Trae 技能目录，把 `-a` 换成你的客户端 id 重装（填错时 CLI 会列出全部合法 id）",
+      "`-g` 不带 `-a` 会装到所有检测到的客户端，其中有不支持全局安装的（如 `eve`）时整条命令失败退出",
+      "Skills CLI 声明需要 Node.js 22.20+；低版本可能只警告，但建议先升级",
+      "不要让 Agent 在生产机器上直接执行目标代码；先准备断网、限额的隔离环境（README 的 Requirements）",
+      "报告默认写到 `~/security-audit-skill/<仓库名>/run-<N>`，同一仓库多次运行会叠加，别把旧报告当新结果",
+      "它只报「已确认的边界失效」，防御纵深缺失只算加固建议，不要当成漏洞清单",
+      "审计他人代码前先确认授权范围；未经授权不要对线上系统做探测"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/security-audit-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/security-audit-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "安全审计 Skill",
+    "security-audit 安装",
+    "AI 代码审计",
+    "Agent 安全审计",
+    "漏洞挖掘",
+    "security audit skill",
+    "Claude Code 安全审计",
+    "代码安全扫描",
+    "Security Audit 中文教程",
+    "security audit deploy guide"
+  ],
+  "topics": [
+    "security-audit",
+    "ai-agent",
+    "agent-skill",
+    "vulnerability",
+    "static-analysis",
+    "claude-code",
+    "nodejs"
+  ]
+}
