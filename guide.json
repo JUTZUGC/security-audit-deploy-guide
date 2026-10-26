@@ -8,7 +8,7 @@
     "oneLiner": "给编码 Agent 用的多阶段安全审计技能",
     "officialRepo": "https://github.com/cloudflare/security-audit-skill",
     "officialDocs": "https://github.com/cloudflare/security-audit-skill#installation",
-    "stars": "45.8k",
+    "stars": "47.4k",
     "license": "MIT",
     "highlights": [
       "六阶段流程：侦察 → 覆盖率驱动挖掘 → 候选验证 → 结构化输出 → 独立复核 → 报告",
